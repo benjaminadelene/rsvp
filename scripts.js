@@ -64,5 +64,7 @@ window.onclick = function(event) {
 
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
-    section.scrollIntoView({ behavior: 'smooth'});
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
 }

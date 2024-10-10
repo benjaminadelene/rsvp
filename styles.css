@@ -10,7 +10,7 @@ body, html {
 }
 .container {
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .section {
     min-height: 100vh;
@@ -34,14 +34,14 @@ body, html {
 }
 #intro { 
     background-color: #F8F7F4; /* theme color */
-    position: fixed;
+    position: sticky;
+    top: 0;
     height: 100vh;
     width: 100vw;
     z-index: 1;
     opacity: 1;
 }
 #countdown-section-sg::before { background-color: #e5f1f8; }
-#spacer { opacity: 0; }
 #schedule-sg::before { background-color: #e5f8e7; }
 #map-sg::before { background-color: #f8f5e5; }
 #transport-sg::before { background-color: #f0e5f8; }
@@ -85,14 +85,11 @@ h2 {
 }
 .schedule-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 1200px;
-}
-.schedule-details {
-    flex: 1;
-    padding: 0 20px;
+    max-width: 100%;
+    margin: 0 auto;
 }
 .schedule-image {
     flex: 1;
@@ -200,4 +197,52 @@ h2 {
     .map-container {
         height: 50vh;
     }
+}
+
+.invitation-container {
+    position: relative;
+    overflow: hidden;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.schedule-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.flowers {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    padding-left: 10px;
+}
+
+.flowers img {
+    width: 100%;
+    height: auto;
+}
+
+.flowers-bottom {
+    bottom: 0;
+    animation: fade1 3s infinite
+}
+
+.flowers-top {
+    top: 0;
+    animation: fade2 3s infinite
+}
+
+@keyframes fade1 {
+    0%, 100% { opacity: 0; }
+    33% { opacity: 1; }
+    66% { opacity: 0; }
+}
+
+@keyframes fade2 {
+    0%, 100% { opacity: 1; }
+    33% { opacity: 0; }
+    66% { opacity: 1; }
 }
