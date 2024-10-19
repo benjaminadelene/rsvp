@@ -14,57 +14,57 @@ function updateCountdown(elementId, targetDate) {
     const countdownElement = document.getElementById(elementId);
 
     if (distance < 0) {
-        countdownElement.innerHTML = "The Big Day is Here!";
+        countdownElement.innerHTML = '<div class="countdown-complete">The Big Day is Here! 🎉</div>';
     } else {
-        countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        countdownElement.innerHTML = `
+        <div class="countdown-item">
+            <div class="countdown-number">${days}</div>
+            <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-item">
+            <div class="countdown-number">${String(hours).padStart(2, '0')}</div>
+            <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-item">
+            <div class="countdown-number">${String(minutes).padStart(2, '0')}</div>
+            <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-item">
+            <div class="countdown-number">${String(seconds).padStart(2, '0')}</div>
+            <div class="countdown-label">Seconds</div>
+        </div>
+    `;
     }
+}
+
+// Location switching function
+function switchLocation(location) {
+    // Update tab buttons
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+        if (button.textContent.toLowerCase() === location) {
+            button.classList.add('active');
+        }
+    });
+
+    // Update content visibility
+    document.querySelectorAll('.location-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.getElementById(`${location}-content`).classList.add('active');
 }
 
 function startCountdowns() {
-    setInterval(() => updateCountdown("countdown-sg", weddingDateSG), 1000);
-    setInterval(() => updateCountdown("countdown-kch", weddingDateKCH), 1000);
+    setInterval(() => {
+        updateCountdown("countdown-sg", weddingDateSG);
+        updateCountdown("countdown-kch", weddingDateKCH);
+    }, 1000);
 }
 
-// Start the countdowns when the page loads
-window.addEventListener('load', startCountdowns);
-
-// Image modal
-const modal = document.getElementById("myModal");
-const modalImg = document.getElementById("modalImg");
-let slideIndex = 1;
-const slides = document.querySelectorAll('.gallery img');
-
-function openModal() {
-    modal.style.display = "block";
-}
-
-function closeModal() {
-    modal.style.display = "none";
-}
-
-function plusSlides(n) {
-    showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
-    modalImg.src = slides[slideIndex-1].src;
-}
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        closeModal();
-    }
-}
-
-function scrollToSection(sectionId) {
-    const section = document.getElementById(sectionId);
-    if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-    }
-}
+// Initialize when page loads
+window.addEventListener('load', () => {
+    startCountdowns();
+});
