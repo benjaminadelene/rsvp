@@ -55,6 +55,12 @@ function switchLocation(location) {
         content.classList.remove('active');
     });
     document.getElementById(`${location}-content`).classList.add('active');
+
+    // Update SVG visibility
+    document.querySelectorAll('.intro-svg').forEach(svg => {
+        svg.style.display = 'none';
+    });
+    document.getElementById(`intro-svg-${location}`).style.display = 'block';
 }
 
 function startCountdowns() {
@@ -67,4 +73,5 @@ function startCountdowns() {
 // Initialize when page loads
 window.addEventListener('load', () => {
     startCountdowns();
+    switchLocation('singapore');
 });
