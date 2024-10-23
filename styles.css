@@ -370,6 +370,9 @@ h3 {
     .transport-item {
         width: 100%;
     }
+    .invitation-container .flowers {
+        padding-left: 0px;
+    }
 }
 
 .invitation-container {
